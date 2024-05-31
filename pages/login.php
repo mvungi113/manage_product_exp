@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="alert alert-danger" role="alert">
                         <?php echo "<p>$error_message</p>" ?>
                     </div>
-
+                    
                 <?php endif; ?>
                 <h2>Login</h2>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

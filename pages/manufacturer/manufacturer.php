@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include_once '../../includes/header.php' ?>
 
@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
 
         <div class="col-sm-6 mb-3 mb-sm-0 pt-4">
-            <a href="available_products.php" style="text-decoration: none;" class="card-link">
+            <a href="./available_products.php" style="text-decoration: none;" class="card-link">
                 <div class="card">
                     <div class="card-body text-center">
                         <!-- Circular Image -->
@@ -38,6 +38,9 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </a>
         </div>
+       
+
+    
     </div>
 </div>
 

@@ -38,12 +38,20 @@ include_once './manufacturer_header.php';
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="alert alert-success" role="alert">
+                <div class="alert text-success" role="alert">
                     QR Code Generated Successfully
+                </div>
+                <div class="mb-3">
+                    <?php echo '<img src="' . $filePath . '" alt="QR Code">'; ?>
                 </div>
 
 
-                <?php echo '<img src="' . $filePath . '" alt="QR Code">'; ?>
+
+                <div class="mb-3">
+                    <a href="<?php echo $filePath; ?>" download="product_qrcode.png">
+                        <button class="btn btn-primary">Download</button>
+                    </a>
+                </div>
 
             </div>
         </div>

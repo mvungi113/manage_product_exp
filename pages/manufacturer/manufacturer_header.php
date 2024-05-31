@@ -11,14 +11,15 @@
                 <div class="col-md-8">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                            <a class="nav-link active" aria-current="page" href="./manufacturer.php">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Register Product</a>
+                            <a class="nav-link active" aria-current="page" href="./register_product.php">Register Product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Available Product</a>
+                            <a class="nav-link active" aria-current="page" href="./available_products.php">Available Product</a>
                         </li>
+                        
                     </ul>
                 </div>
                 <!-- Right logout link -->
