@@ -1,0 +1,19 @@
+.center-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-control, .form-select{
+    border: 1px solid cornflowerblue !important;
+}
+.form-control:focus,
+.btn:focus {
+    box-shadow: none;
+    outline: none;
+    
+}
+.a_decoration{
+    text-decoration: none !important;
+}
