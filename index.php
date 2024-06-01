@@ -12,8 +12,8 @@
     <h1>Welcome to the Dashboard</h1>
    
     <!-- Links to Register and Login pages -->
-    <p>Not registered yet? <a href="./pages/auth/register.php">Register</a></p>
-    <p>Already have an account? <a href="./pages/auth/login.php">Login</a></p>
+    <p>Not registered yet? <a href="./pages/register.php">Register</a></p>
+    <p>Already have an account? <a href="./pages/login.php">Login</a></p>
 </body>
 
 </html>
