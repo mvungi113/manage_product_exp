@@ -13,14 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (register_user($first_name, $last_name, $email, $phone_number, $gender, $role, $password)) {
         $success_message = "Registration successful.";
-        header('Location: ../pages/login.php');
+        header('Location: ./admin/admin.php');
     } else {
         $error_message = "Registration failed.";
     }
 
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +33,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <!-- Brand logo -->
+        <a class="navbar-brand" href="#">Brand-logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="row w-100">
+                <!-- Center links -->
+                <div class="col-md-8">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./admin/admin.php">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./register_authority.php">Register Authority Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./admin/notification.php">Notification</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Right logout link -->
+                <div class="col-md-4 text-end">
+                    <a href="../includes/logout.php" class="btn btn-outline-light">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
 
     <div class="container">
         <div class="row">
@@ -88,12 +119,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Role</label>
-                        <select class="form-select" name="role" required aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="manufacturer">Manufacture</option>
-                            <option value="Pharmacy">Pharmacy</option>
-                        </select>
+                        <!-- <label for="exampleFormControlInput1" class="form-label">Role</label> -->
+                        <input type="text" name="role" required class="form-control" id="exampleFormControlInput1" value="Authority"  >
+
                    </div>
 
                     <div class="mb-3">
@@ -113,6 +141,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 
-</body>
-
-</html>
+<?php include_once '../includes/footer.php' ?>
