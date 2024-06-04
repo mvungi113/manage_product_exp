@@ -14,10 +14,10 @@
                             <a class="nav-link active" aria-current="page" href="./pharmacy.php">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./process_qr.php">Scan Bar-Code</a>
+                            <a class="nav-link active" aria-current="page" href="./scanner.php">Scan Bar-Code</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Available Products</a>
+                            <a class="nav-link active" aria-current="page" href="./available_product.php">Available Products</a>
                         </li>
                     </ul>
                 </div>
