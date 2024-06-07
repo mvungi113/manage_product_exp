@@ -9,7 +9,7 @@ $offset = ($page - 1) * $recordsPerPage;
 
 // Fetch 10 products from the database based on pagination
 $sql = "SELECT company_name, product_name, manufacture_date, expire_date, qr_code_path 
-        FROM products 
+        FROM pharmacyproduct 
         LIMIT $offset, $recordsPerPage";
 $result = $conn->query($sql);
 

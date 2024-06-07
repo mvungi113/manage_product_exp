@@ -1,9 +1,14 @@
 <?php
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../pages/login.php");
+    exit();
+}
+
 include_once '../../config/db_config.php';
 
 // Fetch products that will expire within the next 90 or 30 days
-$sql = "SELECT company_name, product_name, manufacture_date, expire_date, qr_code_path FROM products WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
+$sql = "SELECT company_name, product_name, manufacture_date, expire_date, qr_code_path FROM manufacturerproducts WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
 $result = $conn->query($sql);
 
 // Include the header

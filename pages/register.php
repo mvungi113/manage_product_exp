@@ -101,6 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="password" id="inputPassword5" name="password" class="form-control" aria-describedby="passwordHelpBlock">
 
                     </div>
+
+                    <div class="mb-3">
+                        <Span>Already Have an Account <a class="text-primary" style="text-decoration: none;" href="./login.php">Login Here</a></Span>
+                    </div>
                     
                     <div class="mb-3 float-right">
                         <button class="btn btn-primary " name="submit" type="submit">Register</button>

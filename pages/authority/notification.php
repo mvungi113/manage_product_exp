@@ -3,7 +3,7 @@ session_start();
 include_once '../../config/db_config.php';
 
 // Fetch the count of products that will expire within the next 90 days
-$countQuery = "SELECT COUNT(*) AS alert_count FROM products WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
+$countQuery = "SELECT COUNT(*) AS alert_count FROM pharmacyproduct WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
 $countResult = $conn->query($countQuery);
 $countRow = $countResult->fetch_assoc();
 $alertCount = $countRow['alert_count'];

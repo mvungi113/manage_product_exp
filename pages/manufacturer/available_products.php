@@ -1,5 +1,14 @@
 <?php
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../pages/login.php");
+    exit();
+}
+
+// Get the logged-in user's ID
+$user_id = $_SESSION['user_id'];
+
+// Include database configuration
 include_once '../../config/db_config.php';
 
 // Pagination variables
@@ -7,14 +16,15 @@ $recordsPerPage = 10;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($page - 1) * $recordsPerPage;
 
-// Fetch 10 products from the database based on pagination
+// Fetch 10 products from the database based on pagination for the logged-in user
 $sql = "SELECT company_name, product_name, manufacture_date, expire_date, qr_code_path 
-        FROM products 
+        FROM manufacturerproducts 
+        WHERE user_id = $user_id
         LIMIT $offset, $recordsPerPage";
 $result = $conn->query($sql);
 
-// Count total number of records
-$totalRecordsSql = "SELECT COUNT(*) AS total FROM products";
+// Count total number of records for the logged-in user
+$totalRecordsSql = "SELECT COUNT(*) AS total FROM manufacturerproducts WHERE user_id = $user_id";
 $totalRecordsResult = $conn->query($totalRecordsSql);
 $totalRecords = $totalRecordsResult->fetch_assoc()['total'];
 

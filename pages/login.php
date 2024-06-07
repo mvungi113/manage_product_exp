@@ -22,13 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['role'] = $user['role'];
 
                 // Redirect based on user role
-                if ($user['role'] == 'admin') {
+                if ($user['role'] == 'Admin') {
                     header("Location: ../pages/admin/admin.php");
-                } elseif ($user['role'] == 'authority') {
+                } elseif ($user['role'] == 'Authority') {
                     header("Location: ../pages/authority/authority.php");
                 } elseif ($user['role'] == 'manufacturer') {
                     header("Location: ../pages/manufacturer/manufacturer.php");
-                } elseif ($user['role'] == 'pharmacy') {
+                } elseif ($user['role'] == 'Pharmacy') {
                     header("Location: ../pages/pharmacy/pharmacy.php");
                 }
                 exit();
@@ -83,8 +83,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     </div>
                     <div class="mb-3">
+                        <Span>Don't Have an Account <a class="text-primary" style="text-decoration: none;" href="./register.php">Register Here</a></Span>
+                    </div>
+                    <div class="mb-3">
                         <button class="btn btn-primary">Login</button>
                     </div>
+
 
                 </form>
             </div>

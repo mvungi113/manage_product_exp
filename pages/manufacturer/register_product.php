@@ -1,4 +1,11 @@
-<?php include_once '../../includes/header.php' ?>
+<?php session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../pages/login.php");
+    exit();
+}
+
+ include_once '../../includes/header.php' ;
+ ?>
 
 <?php include_once './manufacturer_header.php' ?>
 

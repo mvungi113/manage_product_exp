@@ -7,8 +7,8 @@ $usersPerPage = 10;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($page - 1) * $usersPerPage;
 
-// Fetch users from the database
-$sql = "SELECT * FROM users LIMIT $offset, $usersPerPage";
+// Fetch users from the database excluding admin and authority roles
+$sql = "SELECT * FROM users WHERE role NOT IN ('admin', 'authority') LIMIT $offset, $usersPerPage";
 $result = $conn->query($sql);
 
 // Calculate total number of users

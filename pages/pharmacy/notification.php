@@ -1,10 +1,23 @@
 <?php
 session_start();
+// Session check
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../pages/login.php");
+    exit();
+}
 include_once '../../config/db_config.php';
 
-// Fetch products that will expire within the next 90 days
-$sql = "SELECT company_name, product_name, manufacture_date, expire_date FROM pharmacyproduct WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
-$result = $conn->query($sql);
+// Get the user ID from the session
+$user_id = $_SESSION['user_id'];
+
+// Fetch products that belong to the logged-in user and will expire within the next 90 days
+$sql = "SELECT company_name, product_name, manufacture_date, expire_date 
+        FROM pharmacyproduct 
+        WHERE user_id = ? AND DATEDIFF(expire_date, CURDATE()) <= 90";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // Include the header
 include_once '../../includes/header.php';
@@ -61,5 +74,8 @@ include_once './pharmacy_header.php';
 <?php
 // Include the footer
 include_once '../../includes/footer.php';
+
+// Close prepared statement
+$stmt->close();
 $conn->close();
 ?>

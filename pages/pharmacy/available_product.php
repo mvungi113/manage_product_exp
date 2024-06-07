@@ -1,6 +1,28 @@
-<?php include_once '../../config/db_config.php' ?>
-<?php include_once '../../includes/header.php' ;
-include_once './pharmacy_header.php';?>
+<?php
+// Session check
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../pages/login.php");
+    exit();
+}
+?>
+
+<?php 
+include_once '../../config/db_config.php';
+include_once '../../includes/header.php';
+include_once './pharmacy_header.php';
+
+// Get the user ID from the session
+$user_id = $_SESSION['user_id'];
+
+// Fetch products associated with the user ID
+$sql = "SELECT * FROM pharmacyproduct WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+?>
 
 <div class="container mt-5">
     <h2 class="mb-4">Available Products</h2>
@@ -8,7 +30,7 @@ include_once './pharmacy_header.php';?>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                <th>ID</th>
+                    <th>ID</th>
                     <th>Product Name</th>
                     <th>Company Name</th>
                     <th>Manufacture Date</th>
@@ -18,19 +40,12 @@ include_once './pharmacy_header.php';?>
             </thead>
             <tbody>
                 <?php
-                // Include the database connection
-                include_once '../../config/db_config.php';
-
-                // Fetch products from the database
-                $sql = "SELECT * FROM pharmacyproduct";
-                $result = $conn->query($sql);
-
                 if ($result->num_rows > 0) {
                     // Output data of each row
                     while($row = $result->fetch_assoc()) {
                         ?>
                         <tr>
-                        <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row['id']; ?></td>
                             <td><?php echo $row['product_name']; ?></td>
                             <td><?php echo $row['company_name']; ?></td>
                             <td><?php echo $row['manufacture_date']; ?></td>
@@ -42,12 +57,12 @@ include_once './pharmacy_header.php';?>
                 } else {
                     ?>
                     <tr>
-                        <td colspan="5">No products found</td>
+                        <td colspan="6">No products found for this user.</td>
                     </tr>
                     <?php
                 }
-                // Close database connection
-                $conn->close();
+                // Close prepared statement
+                $stmt->close();
                 ?>
             </tbody>
         </table>
