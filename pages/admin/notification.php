@@ -1,6 +1,7 @@
 <?php
+// Start session and include database configuration
 session_start();
-include_once '../../config/db_config.php';
+include_once '../../config/db_config.php'; // Adjust path as per your file structure
 
 // Fetch the count of products that will expire within the next 90 days
 $countQuery = "SELECT COUNT(*) AS alert_count FROM pharmacyproduct WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
@@ -9,12 +10,12 @@ $countRow = $countResult->fetch_assoc();
 $alertCount = $countRow['alert_count'];
 
 // Fetch the product details that will expire within the next 90 days
-$sql = "SELECT company_name, product_name, manufacture_date, expire_date, qr_code_path FROM products WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
+$sql = "SELECT company_name, product_name, manufacture_date, expire_date FROM pharmacyproduct WHERE DATEDIFF(expire_date, CURDATE()) <= 90";
 $result = $conn->query($sql);
 
 // Include the header
-include_once '../../includes/header.php';
-include_once './admin_header.php';
+include_once '../../includes/header.php'; // Adjust path as per your file structure
+include_once './admin_header.php'; // Adjust path as per your file structure
 ?>
 
 <div class="container mt-5">
@@ -47,6 +48,6 @@ include_once './admin_header.php';
 
 <?php
 // Include the footer
-include_once '../../includes/footer.php';
+include_once '../../includes/footer.php'; // Adjust path as per your file structure
 $conn->close();
 ?>

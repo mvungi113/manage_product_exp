@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 
 
-<?php include_once './/authority_header.php' ?>
+<?php include_once './authority_header.php' ?>
 <div class="container">
     <h2>Authority Page</h2>
     <div class="row">

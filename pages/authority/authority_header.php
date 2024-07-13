@@ -17,6 +17,9 @@
                             <a class="nav-link active" aria-current="page" href="./users.php"> Users</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./available_product.php"> Available Products</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="./notification.php">Notification</a>
                         </li>
                     </ul>

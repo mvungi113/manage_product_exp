@@ -7,15 +7,32 @@ $recordsPerPage = 10;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($page - 1) * $recordsPerPage;
 
-// Fetch 10 products from the database based on pagination
-$sql = "SELECT company_name, product_name, manufacture_date, expire_date, qr_code_path 
+// Fetch products from the database based on pagination
+$sql = "SELECT id, company_name, product_name, manufacture_date, expire_date 
         FROM pharmacyproduct 
-        LIMIT $offset, $recordsPerPage";
-$result = $conn->query($sql);
+        LIMIT ?, ?";
+$stmt = $conn->prepare($sql);
+
+if ($stmt === false) {
+    die('Prepare failed: ' . htmlspecialchars($conn->error));
+}
+
+$stmt->bind_param('ii', $offset, $recordsPerPage);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result === false) {
+    die('Execute failed: ' . htmlspecialchars($stmt->error));
+}
 
 // Count total number of records
-$totalRecordsSql = "SELECT COUNT(*) AS total FROM products";
+$totalRecordsSql = "SELECT COUNT(*) AS total FROM pharmacyproduct";
 $totalRecordsResult = $conn->query($totalRecordsSql);
+
+if ($totalRecordsResult === false) {
+    die('Query failed: ' . htmlspecialchars($conn->error));
+}
+
 $totalRecords = $totalRecordsResult->fetch_assoc()['total'];
 
 // Calculate total pages
@@ -35,40 +52,19 @@ include_once './authority_header.php';
                 <th>Product Name</th>
                 <th>Manufacture Date</th>
                 <th>Expire Date</th>
-                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    // Calculate remaining days
-                    $expireDate = new DateTime($row['expire_date']);
-                    $today = new DateTime();
-                    $remainingDays = $today->diff($expireDate)->days;
-
-                    // Determine status
-                    $status = '';
-                    if ($remainingDays <= 0) {
-                        $status = 'Expired';
-                        $statusColor = 'table-danger';
-                    } elseif ($remainingDays <= 30) {
-                        $status = 'Warning';
-                        $statusColor = 'table-warning';
-                    } elseif ($remainingDays <= 90) {
-                        $status = 'Soon Expired';
-                        $statusColor = 'table-warning';
-                    } else {
-                        $status = 'Normal';
-                        $statusColor = 'table-success';
-                    }
-
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($row['company_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['product_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['manufacture_date']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['expire_date']) . "</td>";
-                    echo "<td class='$statusColor'>$status</td>";
+                    echo "<td><a href='delete_product.php?id=" . urlencode($row['id']) . "' class='btn btn-danger btn-sm'>Delete</a></td>";
                     echo "</tr>";
                 }
             } else {

@@ -11,4 +11,4 @@ echo $email;
 // Fetch user role from the database and display respective dashboard content
 ?>
 
-<!
+

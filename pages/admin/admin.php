@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <?php include_once './admin_header.php' ?>
 <div class="container">
-    <h2>Pharmacy Page</h2>
+    <h2>Admin Page</h2>
     <div class="row">
         <div class="col-sm-4 mb-3 mb-sm-0 pt-4">
             <a href="./notification.php" class="text-decoration-none">

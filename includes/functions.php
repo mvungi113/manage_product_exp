@@ -1,6 +1,6 @@
 <?php
 include '../config/db_config.php'; 
-function register_user($first_name, $last_name, $email, $phone_number, $gender, $role, $password)
+function register_user($first_name, $last_name, $email, $phone_number, $gender, $role, $password, $country, $district, $ward, $region)
 {
     global $conn;
 
@@ -8,8 +8,10 @@ function register_user($first_name, $last_name, $email, $phone_number, $gender, 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare SQL statement
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, phone_number, gender, role, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssss", $first_name, $last_name, $email, $phone_number, $gender, $role, $hashed_password);
+    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, phone_number, gender, role, password, country, district, ward, region) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    // Bind parameters
+    $stmt->bind_param("sssssssssss", $first_name, $last_name, $email, $phone_number, $gender, $role, $hashed_password, $country, $district, $ward, $region);
 
     // Execute the statement
     if ($stmt->execute()) {
